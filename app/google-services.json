@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "700679198181",
+    "project_id": "moneycontroller-1b958",
+    "storage_bucket": "moneycontroller-1b958.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700679198181:android:7a3a0de7079f22998e0b0c",
+        "android_client_info": {
+          "package_name": "com.example.pasargad.moneycontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "700679198181-f8m0cmth7178fo8s77cbemi85ulhnjoi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMNFESoyBL123-WP106uAUTu2Dg-Ee-PI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "700679198181-f8m0cmth7178fo8s77cbemi85ulhnjoi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
