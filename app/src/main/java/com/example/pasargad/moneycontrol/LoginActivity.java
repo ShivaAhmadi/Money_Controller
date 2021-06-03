@@ -29,6 +29,12 @@ public class LoginActivity extends AppCompatActivity {
 
         auth=FirebaseAuth.getInstance();
 
+        if (auth.getCurrentUser() != null && !auth.getCurrentUser().isAnonymous()) {
+            startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+            finish();
+            return;
+        }
+
         inputEmail=findViewById(R.id.inputEmail);
         inputPassword=findViewById(R.id.inputPassword);
 
@@ -47,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+                            finish();
                             Toast toast=Toast.makeText(getApplicationContext(),"   شما با موفقیت وارد شدید!   ",Toast.LENGTH_SHORT);
                             View view=toast.getView();
                             view.setBackgroundResource(R.drawable.toastbackground);
@@ -63,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this,SignupActivity.class));
-
+                finish();
             }
         });
     }

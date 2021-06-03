@@ -8,6 +8,7 @@
     <color name="lightgreen">#32CD32</color>
     <color name="darkorange">#ff8c00</color>
     <color name="white">#ffffff</color>
-    <color name="lightpink">#FFC0CB</color>
+    <color name="lightpink">#ffc0cb</color>
     <color name="darkpink">#ff748c</color>
+    <color name="black">#000000</color>
 </resources>

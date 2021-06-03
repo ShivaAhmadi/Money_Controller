@@ -6,4 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomify_nav"
+        app:layout_constraintTop_toBottomOf="@+id/tool">
+
+    </FrameLayout>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/darkpink"
+        android:id="@+id/tool">
+
+        <include layout="@layout/maintoolbar" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    <com.volcaniccoder.bottomify.BottomifyNavigationView
+        android:id="@+id/bottomify_nav"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/darkpink"
+        android:orientation="horizontal"
+        app:active_color="@color/white"
+        app:animation_duration="300"
+        app:item_padding="4dp"
+        app:item_text_size="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/menu"
+        app:passive_color="@color/black"
+        app:pressed_color="@color/darkpink"
+        app:scale_percent="5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

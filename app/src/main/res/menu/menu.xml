@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/Notifications"
+        android:title="@string/report"
+        android:width="10dp"
+        android:height="10dp"
+        android:icon="@drawable/report"
+        />
+    <item
+        android:id="@+id/dashboard"
+        android:title="@string/register"
+        android:width="10dp"
+        android:height="10dp"
+        android:icon="@drawable/transfer"/>
+
+    <item
+        android:id="@+id/home"
+        android:checked="true"
+        android:title="@string/Home"
+        android:width="10dp"
+        android:height="10dp"
+        android:state_checked="true"
+        android:icon="@drawable/home"
+        />
+</menu>

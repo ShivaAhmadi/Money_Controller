@@ -66,6 +66,7 @@ public class SignupActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     startActivity(new Intent(SignupActivity.this,LoginActivity.class));
+                                    finish();
                                 }
                             });
 
@@ -84,6 +85,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SignupActivity.this,LoginActivity.class));
+                finish();
             }
         });
 
