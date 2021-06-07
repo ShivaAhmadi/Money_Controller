@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574b</color>
+    <color name="colorPrimary">#ff748c</color>
+    <color name="colorPrimaryDark">#D81B60</color>
     <color name="colorAccent">#D81B60</color>
     <color name="gray">#778899</color>
     <color name="yellow">#ffff00</color>
@@ -11,4 +11,6 @@
     <color name="lightpink">#ffc0cb</color>
     <color name="darkpink">#ff748c</color>
     <color name="black">#000000</color>
+    <color name="mdtp_accent_color">@color/colorPrimary</color>
+    <color name="mdtp_accent_color_dark">@color/colorPrimaryDark</color>
 </resources>
