@@ -1,17 +1,23 @@
 package com.example.pasargad.moneycontrol;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.volcaniccoder.bottomify.BottomifyNavigationView;
 import com.volcaniccoder.bottomify.OnNavigationItemChangeListener;
 
+import java.util.ArrayList;
+
 public class HomeActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +49,6 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 }
