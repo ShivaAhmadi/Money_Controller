@@ -1,11 +1,13 @@
 package com.example.pasargad.moneycontrol;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.view.LayoutInflaterCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import io.opencensus.metrics.export.Summary;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +29,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
@@ -38,6 +43,7 @@ public class ReportFragment extends Fragment {
     private String currentUserId;
 
     TextView showtype;
+    ImageView backbtn;
 
 
     public ReportFragment() {
@@ -62,6 +68,8 @@ public class ReportFragment extends Fragment {
         recview.setLayoutManager(new LinearLayoutManager(getContext()));
 
         showtype=view.findViewById(R.id.showType);
+        backbtn=view.findViewById(R.id.backbtn);
+
 
         mAuth=FirebaseAuth.getInstance();
         currentUserId=mAuth.getCurrentUser().getUid();
@@ -103,18 +111,18 @@ public class ReportFragment extends Fragment {
                             registerViewHolser.showDate.setText(regDate);
                             registerViewHolser.showType.setText(regIncome);
                             getView().findViewById(R.id.idProgressBar).setVisibility(View.GONE);
+                            registerViewHolser.deleteImage.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    getRef(i).removeValue(new DatabaseReference.CompletionListener() {
+                                        @Override
+                                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                            Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            });
 
-                        }
-                        else {
-                            String regPrice=snapshot.child("price").getValue().toString();
-                            String regDetails=snapshot.child("details").getValue().toString();
-                            String regDate=snapshot.child("date").getValue().toString();
-                            String regIncome=snapshot.child("isIncome").getValue().toString();
-
-                            registerViewHolser.showPrice.setText(regPrice);
-                            registerViewHolser.shoeDetailes.setText(regDetails);
-                            registerViewHolser.showDate.setText(regDate);
-                            registerViewHolser.showType.setText(regIncome);
                         }
 
                     }
@@ -136,16 +144,15 @@ public class ReportFragment extends Fragment {
                 return viewHolser;
             }
         };
-
-
         recview.setAdapter(adapter);
         adapter.startListening();
-    }
 
+    }
 
     public static class RegisterViewHolser extends RecyclerView.ViewHolder{
 
         TextView showTitle,shoeDetailes,showType,showDate,showPrice;
+        ImageView editImage, deleteImage;
 
         public RegisterViewHolser(@NonNull View itemView) {
             super(itemView);
@@ -154,7 +161,26 @@ public class ReportFragment extends Fragment {
             showType=itemView.findViewById(R.id.showType);
             showDate=itemView.findViewById(R.id.showDate);
             showPrice=itemView.findViewById(R.id.showPrice);
+
+            deleteImage = itemView.findViewById(R.id.imgDelete);
         }
     }
+
+    private void onStarClicked (DatabaseReference postRef){
+        postRef.runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+
+                return null;
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+
+            }
+        });
+    }
+
 
 }

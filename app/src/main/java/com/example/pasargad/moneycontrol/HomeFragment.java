@@ -1,8 +1,10 @@
 package com.example.pasargad.moneycontrol;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +61,7 @@ public class HomeFragment extends Fragment {
         TextView incom=view.findViewById(R.id.txtIncome);
         TextView salary=view.findViewById(R.id.txtSalary);
 
+
         return view;
     }
     public void onStart(){
@@ -82,26 +86,34 @@ public class HomeFragment extends Fragment {
                             String regIncome= isIncome ? "درآمد" : "هزینه";
 
 
+
                             registerViewHolser.showTitle.setText(regTitle);
                             registerViewHolser.showPrice.setText(regPrice);
                             //registerViewHolser.shoeDetailes.setText(regDetails);
                             //registerViewHolser.showDate.setText(regDate);
                             registerViewHolser.showType.setText(regIncome);
                             getView().findViewById(R.id.idProgressBar).setVisibility(View.GONE);
+                            registerViewHolser.deleteImage.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    getRef(i).removeValue(new DatabaseReference.CompletionListener() {
+                                        @Override
+                                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                            Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            });
 
+                            registerViewHolser.editImage.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent i = new Intent(getActivity(), EditActivity.class);
+                                    i.putExtra("key", regId);
+                                    startActivity(i);
+                                }
+                            });
                         }
-                        else {
-                            String regPrice=snapshot.child("price").getValue().toString();
-                            //String regDetails=snapshot.child("details").getValue().toString();
-                            //String regDate=snapshot.child("date").getValue().toString();
-                            String regIncome=snapshot.child("isIncome").getValue().toString();
-
-                            registerViewHolser.showPrice.setText(regPrice);
-                           // registerViewHolser.shoeDetailes.setText(regDetails);
-                           // registerViewHolser.showDate.setText(regDate);
-                            registerViewHolser.showType.setText(regIncome);
-                        }
-
                     }
 
                     @Override
@@ -129,6 +141,7 @@ public class HomeFragment extends Fragment {
     public static class RegisterViewHolser extends RecyclerView.ViewHolder{
 
         TextView showTitle,showType,showPrice;
+        ImageView editImage, deleteImage;
 
         public RegisterViewHolser(@NonNull View itemView) {
             super(itemView);
@@ -136,6 +149,9 @@ public class HomeFragment extends Fragment {
             showType=itemView.findViewById(R.id.showTypeInfo);
             //showDate=itemView.findViewById(R.id.showDate);
             showPrice=itemView.findViewById(R.id.showPriceInfo);
+
+            editImage = itemView.findViewById(R.id.imgEdit);
+            deleteImage = itemView.findViewById(R.id.imgDelete);
         }
     }
     public void onSum(){
