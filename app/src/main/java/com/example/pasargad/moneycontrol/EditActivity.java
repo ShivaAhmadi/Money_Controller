@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,15 +26,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
-public class EditActivity extends AppCompatActivity {
+public class EditActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener {
 
     Button backbtn;
     Button editbtn;
     EditText inputTitle,inputPrice,inputDate,inputDetailes;
     private DatabaseReference Regref;
     TransactionModel tm;
+    RadioButton RbtnD, RbtnH;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ public class EditActivity extends AppCompatActivity {
         inputPrice=findViewById(R.id.inputPrice);
         inputDate=findViewById(R.id.inputDate);
         inputDetailes=findViewById(R.id.inputDetailes);
+        RbtnD = findViewById(R.id.RbtnD);
+        RbtnH = findViewById(R.id.RbtnH);
 
         Bundle extras = getIntent().getExtras();
 
@@ -65,13 +70,17 @@ public class EditActivity extends AppCompatActivity {
         Regref.child(keyId).get().addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(EditActivity.this, "Shit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditActivity.this, "خطا", Toast.LENGTH_SHORT).show();
             }
         }).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 tm = dataSnapshot.getValue(TransactionModel.class);
-                Toast.makeText(EditActivity.this, "We got it: " + tm.title, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(EditActivity.this, "تراکنش: " + tm.title, Toast.LENGTH_SHORT).show();
+                Toast toast=Toast.makeText(getApplicationContext(), "  تراکنش:   "  + tm.title,Toast.LENGTH_SHORT);
+                View view=toast.getView();
+                view.setBackgroundResource(R.drawable.toastbackground);
+                toast.show();
                 String regTitle=tm.title;
                 String regPrice=Integer.toString(tm.price);
                 String regDetails=tm.details;
@@ -79,6 +88,11 @@ public class EditActivity extends AppCompatActivity {
                 String regDate=persianCalendar.getPersianLongDateAndTime();
                 boolean isIncome = tm.isIncome;
                 String regIncome= isIncome ? "درآمد" : "هزینه";
+                if (isIncome) {
+                    RbtnD.setChecked(true);
+                } else {
+                    RbtnH.setChecked(true);
+                }
 
                 inputDetailes.setText(regDetails);
                 inputDate.setText(regDate);
@@ -96,14 +110,34 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+        inputDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PersianCalendar persianCalendar = new PersianCalendar();
+                DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
+                        EditActivity.this,
+                        persianCalendar.getPersianYear(),
+                        persianCalendar.getPersianMonth(),
+                        persianCalendar.getPersianDay()
+                );
+                datePickerDialog.show(getFragmentManager(), "تاریخ");
+            }
+        });
+
         editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tm.title = inputTitle.getText().toString();
+                tm.details = inputDetailes.getText().toString();
+                tm.price = Integer.parseInt(inputPrice.getText().toString());
+                tm.isIncome = RbtnD.isChecked();
                 Regref.child(keyId).setValue(tm, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                        Toast.makeText(EditActivity.this, "Well done", Toast.LENGTH_SHORT).show();
+                        Toast toast=Toast.makeText(getApplicationContext(),"   تغییرات ثبت شد!   ",Toast.LENGTH_SHORT);
+                        View view=toast.getView();
+                        view.setBackgroundResource(R.drawable.toastbackground);
+                        toast.show();
                         finish();
                     }
                 });
@@ -111,4 +145,11 @@ public class EditActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        inputDate.setText("" + year + "/" + monthOfYear + "/" + dayOfMonth);
+        PersianCalendar persianCalendar = new PersianCalendar();
+        persianCalendar.setPersianDate(year, monthOfYear, dayOfMonth);
+        tm.setDate(persianCalendar.getTimeInMillis());
+    }
 }

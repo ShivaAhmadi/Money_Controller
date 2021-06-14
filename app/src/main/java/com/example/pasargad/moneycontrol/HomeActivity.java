@@ -1,6 +1,7 @@
 package com.example.pasargad.moneycontrol;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -8,8 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,26 +25,69 @@ import com.volcaniccoder.bottomify.OnNavigationItemChangeListener;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
 
+
+    DrawerLayout drawerLayout;
+    ImageView btMenu;
+    ReportFragment reportFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content,new HomeFragment());
-        transaction.commitNow();
+        drawerLayout = findViewById(R.id.drawer_layout);
+        btMenu = findViewById(R.id.bt_menu);
+        btMenu.setVisibility(View.VISIBLE);
+        btMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.END);
+            }
+        });
 
         BottomifyNavigationView bottomifyNavigationView=findViewById(R.id.bottomify_nav);
+
+
+        AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                bottomifyNavigationView.setActiveNavigationIndex(0);
+                new Handler(getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        reportFragment.scrollTo(i);
+                    }
+                }, 1000);
+            }
+        };
+
+        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content,new HomeFragment(listener));
+        transaction.commitNow();
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
+
+        ((TextView) findViewById(R.id.username)).setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        ((Button) findViewById(R.id.logout)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+                finish();
+            }
+        });
+
+        reportFragment = new ReportFragment();
         bottomifyNavigationView.setOnNavigationItemChangedListener(new OnNavigationItemChangeListener() {
             @Override
             public void onNavigationItemChanged(BottomifyNavigationView.NavigationItem navigationItem) {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 switch (navigationItem.getPosition()){
                     case 0:
-                        transaction.replace(R.id.content,new ReportFragment());
+                        transaction.replace(R.id.content, reportFragment);
                         transaction.commitNow();
                         break;
                     case 1:
@@ -47,7 +95,7 @@ public class HomeActivity extends AppCompatActivity {
                         transaction.commitNow();
                         break;
                     case 2:
-                        transaction.replace(R.id.content,new HomeFragment());
+                        transaction.replace(R.id.content,new HomeFragment(listener));
                         transaction.commitNow();
                         break;
                 }

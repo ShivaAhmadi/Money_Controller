@@ -2,6 +2,7 @@ package com.example.pasargad.moneycontrol;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -82,7 +83,7 @@ public class RegisterFragment extends DialogFragment implements DatePickerDialog
         registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Status:idk", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getActivity(), "Status:idk", Toast.LENGTH_SHORT).show();
 
                 String title = inputTitle.getText().toString();
                 String details  = inputDetailes.getText().toString();
@@ -100,12 +101,15 @@ public class RegisterFragment extends DialogFragment implements DatePickerDialog
                         .setValue(tm).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getActivity(), "Status:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                        Toast toast=Toast.makeText(getContext(), "  تراکنش ثبت شد  ", Toast.LENGTH_SHORT);
+                        View view=toast.getView();
+                        view.setBackgroundResource(R.drawable.toastbackground);
+                        toast.show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity(), "Status:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "ثبت نشد!" , Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -123,7 +127,7 @@ public class RegisterFragment extends DialogFragment implements DatePickerDialog
                         persianCalendar.getPersianMonth(),
                         persianCalendar.getPersianDay()
                 );
-                datePickerDialog.show(getActivity().getFragmentManager(), "idk");
+                datePickerDialog.show(getActivity().getFragmentManager(), "تاریخ");
             }
         });
 

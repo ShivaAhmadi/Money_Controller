@@ -47,8 +47,28 @@
                 android:backgroundTint="@color/darkpink"
                 android:text="ویرایش تراکنش ها"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:text="لطفا مبلغ را به انگلیسی وارد کنید"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,10 +80,11 @@
 
                 <EditText
                     android:id="@+id/inputPrice"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_weight="0.8"
                     android:backgroundTint="@color/darkpink"
                     android:ems="10"
                     android:inputType="textPersonName"
@@ -71,12 +92,12 @@
 
                 <TextView
                     android:id="@+id/textView5"
-                    android:layout_width="40dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.2"
                     android:text="مبلغ"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -89,9 +110,9 @@
                 android:orientation="horizontal">
 
                 <RadioGroup
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -125,12 +146,12 @@
 
                 <TextView
                     android:id="@+id/textView7"
-                    android:layout_width="200dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.2"
                     android:text="نوع تراکنش"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -143,10 +164,11 @@
 
                 <EditText
                     android:id="@+id/inputTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_weight="0.8"
                     android:backgroundTint="@color/darkpink"
                     android:ems="10"
                     android:inputType="textPersonName"
@@ -154,12 +176,12 @@
 
                 <TextView
                     android:id="@+id/textView6"
-                    android:layout_width="40dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.2"
                     android:text="عنوان"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -173,11 +195,11 @@
 
                 <EditText
                     android:id="@+id/inputDate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:backgroundTint="@color/darkpink"
                     android:clickable="false"
                     android:cursorVisible="false"
@@ -189,19 +211,20 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/openDatePicker"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.05"
                     android:src="@drawable/ic_date"
                     tools:ignore="OnClick" />
 
                 <TextView
                     android:id="@+id/textView8"
-                    android:layout_width="40dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.15"
                     android:text="تاریخ"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -214,10 +237,11 @@
 
                 <EditText
                     android:id="@+id/inputDetailes"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_weight="0.8"
                     android:backgroundTint="@color/darkpink"
                     android:ems="10"
                     android:inputType="textPersonName"
@@ -225,12 +249,12 @@
 
                 <TextView
                     android:id="@+id/textView9"
-                    android:layout_width="40dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.2"
                     android:text="شرح"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -253,7 +277,7 @@
                     android:background="@color/lightpink"
                     android:padding="10dp"
                     android:text="بازگشت"
-                    android:textSize="18sp"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <Button
@@ -267,7 +291,7 @@
                     android:background="@color/lightpink"
                     android:padding="10dp"
                     android:text="ثبت ویرایش"
-                    android:textSize="18sp"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
             </LinearLayout>
 

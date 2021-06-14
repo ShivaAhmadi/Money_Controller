@@ -1,5 +1,6 @@
 package com.example.pasargad.moneycontrol;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,12 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,10 +37,14 @@ public class HomeFragment extends Fragment {
     private DatabaseReference registerRef,Regref;
     private FirebaseAuth mAuth;
     private String currentUserId;
+    protected TextView sum, incom, salary;
+    protected AdapterView.OnItemClickListener listener;
 
 
-    public HomeFragment() {
+    @SuppressLint("ValidFragment")
+    public HomeFragment(AdapterView.OnItemClickListener listener) {
         // Required empty public constructor
+        this.listener = listener;
     }
 
 
@@ -45,6 +53,8 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,22 +63,42 @@ public class HomeFragment extends Fragment {
         recViewInfo=(RecyclerView)view.findViewById(R.id.recViewInfo);
         recViewInfo.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
+
         mAuth=FirebaseAuth.getInstance();
         currentUserId=mAuth.getCurrentUser().getUid();
         Regref=FirebaseDatabase.getInstance().getReference().child("transactions").child(currentUserId);
 
-        TextView sum=view.findViewById(R.id.txtPrice);
-        TextView incom=view.findViewById(R.id.txtIncome);
-        TextView salary=view.findViewById(R.id.txtSalary);
+        sum=view.findViewById(R.id.txtPrice);
+        incom=view.findViewById(R.id.txtIncome);
+        salary=view.findViewById(R.id.txtSalary);
 
+        fetchData();
 
         return view;
     }
+
+    public void fetchData() {
+        WalletService walletService = new WalletService();
+        walletService.fetchData(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), "خطا در دریافت اطلاعات", Toast.LENGTH_SHORT).show();
+            }
+        }, new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                incom.setText(String.valueOf(walletService.getTotalExpense()));
+                salary.setText(String.valueOf(walletService.getTotalIncome()));
+            }
+        }, null);
+    }
+
     public void onStart(){
         super.onStart();
 
         FirebaseRecyclerOptions options= new FirebaseRecyclerOptions.Builder<TransactionModel>()
-                .setQuery(Regref,TransactionModel.class).build();
+                .setQuery(Regref.limitToFirst(5),TransactionModel.class).build();
         FirebaseRecyclerAdapter<TransactionModel,RegisterViewHolser> adapter =new FirebaseRecyclerAdapter<TransactionModel, RegisterViewHolser>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final RegisterViewHolser registerViewHolser, int i, @NonNull TransactionModel transactionModel) {
@@ -99,9 +129,19 @@ public class HomeFragment extends Fragment {
                                     getRef(i).removeValue(new DatabaseReference.CompletionListener() {
                                         @Override
                                         public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                            Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
+                                            Toast toast=Toast.makeText(getContext(),"   تراکنش حذف شد!   ",Toast.LENGTH_SHORT);
+                                            View view=toast.getView();
+                                            view.setBackgroundResource(R.drawable.toastbackground);
+                                            toast.show();
                                         }
                                     });
+                                }
+                            });
+
+                            registerViewHolser.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    listener.onItemClick(null, null, i, 0);
                                 }
                             });
 
@@ -134,8 +174,6 @@ public class HomeFragment extends Fragment {
         };
         recViewInfo.setAdapter(adapter);
         adapter.startListening();
-
-
     }
 
     public static class RegisterViewHolser extends RecyclerView.ViewHolder{

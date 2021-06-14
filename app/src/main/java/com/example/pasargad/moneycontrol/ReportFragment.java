@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.opencensus.metrics.export.Summary;
+import kotlin.reflect.KFunction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -123,6 +124,15 @@ public class ReportFragment extends Fragment {
                                 }
                             });
 
+                            registerViewHolser.editImage.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent i = new Intent(getActivity(), EditActivity.class);
+                                    i.putExtra("key", regId);
+                                    startActivity(i);
+                                }
+                            });
+
                         }
 
                     }
@@ -149,6 +159,11 @@ public class ReportFragment extends Fragment {
 
     }
 
+    public void scrollTo(int position) {
+        if (recview == null) return;
+        recview.scrollToPosition(position);
+    }
+
     public static class RegisterViewHolser extends RecyclerView.ViewHolder{
 
         TextView showTitle,shoeDetailes,showType,showDate,showPrice;
@@ -163,6 +178,7 @@ public class ReportFragment extends Fragment {
             showPrice=itemView.findViewById(R.id.showPrice);
 
             deleteImage = itemView.findViewById(R.id.imgDelete);
+            editImage = itemView.findViewById(R.id.imgEdit);
         }
     }
 

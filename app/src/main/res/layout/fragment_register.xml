@@ -31,7 +31,7 @@
                 android:backgroundTint="@color/darkpink"
                 android:text="ثبت تراکنش ها"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="17sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -44,10 +44,11 @@
 
                 <EditText
                     android:id="@+id/inputPrice"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_weight="0.8"
                     android:backgroundTint="@color/darkpink"
                     android:ems="10"
                     android:inputType="textPersonName"
@@ -55,12 +56,12 @@
 
                 <TextView
                     android:id="@+id/textView5"
-                    android:layout_width="40dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.2"
                     android:text="مبلغ"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -114,7 +115,7 @@
                     android:layout_weight="1"
                     android:text="نوع تراکنش"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -127,10 +128,11 @@
 
                 <EditText
                     android:id="@+id/inputTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_weight="0.8"
                     android:backgroundTint="@color/darkpink"
                     android:ems="10"
                     android:inputType="textPersonName"
@@ -138,12 +140,12 @@
 
                 <TextView
                     android:id="@+id/textView6"
-                    android:layout_width="40dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.2"
                     android:text="عنوان"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -157,35 +159,36 @@
 
                 <EditText
                     android:id="@+id/inputDate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:backgroundTint="@color/darkpink"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textAlignment="viewEnd"
                     android:clickable="false"
                     android:cursorVisible="false"
+                    android:ems="10"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    />
+                    android:inputType="textPersonName"
+                    android:textAlignment="viewEnd" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_date"
                     android:id="@+id/openDatePicker"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.05"
+                    android:src="@drawable/ic_date"
                     tools:ignore="OnClick" />
+
                 <TextView
                     android:id="@+id/textView8"
-                    android:layout_width="40dp"
+                    android:layout_width="0.dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.15"
                     android:text="تاریخ"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -198,10 +201,11 @@
 
                 <EditText
                     android:id="@+id/inputDetailes"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_weight="0.8"
                     android:backgroundTint="@color/darkpink"
                     android:ems="10"
                     android:inputType="textPersonName"
@@ -209,12 +213,12 @@
 
                 <TextView
                     android:id="@+id/textView9"
-                    android:layout_width="40dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.2"
                     android:text="شرح"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <Button
@@ -226,7 +230,7 @@
                 android:background="@color/lightpink"
                 android:padding="10dp"
                 android:text="ثبت تراکنش"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

@@ -34,17 +34,6 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/editTextNAME"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_margin="5dp"
-                        android:backgroundTint="@color/lightpink"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Name"
-                        android:textAlignment="viewEnd" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -134,7 +123,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <EditText
+            <TextView
                 android:id="@+id/editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
