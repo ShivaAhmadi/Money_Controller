@@ -68,12 +68,19 @@ public class HomeActivity extends BaseActivity {
         ((Button) findViewById(R.id.logout)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+
+                startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+
+
                 Toast toast=Toast.makeText(getApplicationContext(),"  شما از حساب کاربری خارج شدید!  ",Toast.LENGTH_SHORT);
                 View view1=toast.getView();
                 view1.setBackgroundResource(R.drawable.toastbackground);
                 toast.show();
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+                finish();
+
+
+
             }
         });
 
@@ -110,9 +117,6 @@ public class HomeActivity extends BaseActivity {
         });
 
         reportFragment = new ReportFragment();
-
-
-
     }
     public void yourMethod(View view) {
         Intent intent = new Intent(HomeActivity.this, EditActivity.class);

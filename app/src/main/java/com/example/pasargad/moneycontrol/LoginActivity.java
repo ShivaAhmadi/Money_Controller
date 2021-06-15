@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +23,8 @@ public class LoginActivity extends BaseActivity {
     EditText inputEmail,inputPassword;
     Button btnLogin,btnSignUp;
     FirebaseAuth auth;
+    ProgressBar pro;
+    View v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

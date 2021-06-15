@@ -90,7 +90,8 @@ public class RegisterFragment extends DialogFragment implements DatePickerDialog
                 String details  = inputDetailes.getText().toString();
                 int amount = Integer.parseInt(inputPrice.getText().toString());
                 boolean isIncome = !RbtnH.isChecked();
-                long submittedAt = System.currentTimeMillis();
+               // long submittedAt = System.currentTimeMillis();
+                long submittedAt = pickedTime;
 
                 TransactionModel tm = new TransactionModel(title, details, isIncome, submittedAt, pickedTime, amount);
 
