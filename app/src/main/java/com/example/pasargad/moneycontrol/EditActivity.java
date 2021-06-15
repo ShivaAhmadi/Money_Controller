@@ -77,7 +77,7 @@ public class EditActivity extends BaseActivity implements DatePickerDialog.OnDat
             public void onSuccess(DataSnapshot dataSnapshot) {
                 tm = dataSnapshot.getValue(TransactionModel.class);
                // Toast.makeText(EditActivity.this, "تراکنش: " + tm.title, Toast.LENGTH_SHORT).show();
-                Toast toast=Toast.makeText(getApplicationContext(), "  تراکنش:   "  + tm.title,Toast.LENGTH_SHORT);
+                Toast toast=Toast.makeText(getApplicationContext(), "  تراکنش:   "  + tm.title+"  ",Toast.LENGTH_SHORT);
                 View view=toast.getView();
                 view.setBackgroundResource(R.drawable.toastbackground);
                 toast.show();

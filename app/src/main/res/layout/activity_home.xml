@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer="end">
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -19,14 +20,46 @@
             android:layout_height="wrap_content"
             android:background="@color/darkpink"
             app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical"
             android:id="@+id/tool">
 
             <include layout="@layout/maintoolbar" />
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tablayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/darkpink"
+                app:tabIndicatorColor="@color/yellow"
+                app:tabSelectedTextColor="@color/yellow"
+                app:tabTextColor="@color/black"
+                android:layoutDirection="rtl">
+
+
+
+            </com.google.android.material.tabs.TabLayout>
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tool"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="8dp">
 
-        <FrameLayout
+        </androidx.viewpager.widget.ViewPager>
+
+
+       <!-- <FrameLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -35,10 +68,10 @@
             app:layout_constraintBottom_toTopOf="@+id/bottomify_nav"
             app:layout_constraintTop_toBottomOf="@+id/tool">
 
-        </FrameLayout>
+        </FrameLayout>-->
 
 
-        <com.volcaniccoder.bottomify.BottomifyNavigationView
+        <!--<com.volcaniccoder.bottomify.BottomifyNavigationView
             android:id="@+id/bottomify_nav"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -50,8 +83,7 @@
             android:orientation="horizontal"
             app:active_color="@color/white"
             app:animation_duration="300"
-            app:item_padding="4dp"
-            app:item_text_size="10sp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -60,7 +92,8 @@
             app:menu="@menu/menu"
             app:passive_color="@color/black"
             app:pressed_color="@color/darkpink"
-            app:scale_percent="5" />
+            app:scale_percent="5" />-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

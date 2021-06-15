@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:padding="8dp"
+        android:paddingBottom="8dp"
         android:background="@color/darkpink">
 
         <ImageView
@@ -35,6 +36,7 @@
             android:textStyle="bold"
             android:layout_centerInParent="true"
             android:textColor="@color/black" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

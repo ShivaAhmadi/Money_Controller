@@ -53,7 +53,7 @@
                     android:drawableRight="@drawable/ic_arrow"
                     android:text="عنوان"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
             </LinearLayout>

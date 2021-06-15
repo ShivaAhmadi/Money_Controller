@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
@@ -106,6 +107,7 @@ public class RegisterFragment extends DialogFragment implements DatePickerDialog
                         view.setBackgroundResource(R.drawable.toastbackground);
                         toast.show();
                     }
+
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -114,6 +116,7 @@ public class RegisterFragment extends DialogFragment implements DatePickerDialog
                 });
             }
         });
+
 
         ImageView openDatePicker = view.findViewById(R.id.openDatePicker);
 
