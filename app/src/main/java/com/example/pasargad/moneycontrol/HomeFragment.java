@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 
+
 public class HomeFragment extends Fragment {
 
     RecyclerView recViewInfo;
@@ -41,7 +42,7 @@ public class HomeFragment extends Fragment {
     protected AdapterView.OnItemClickListener listener;
 
 
-    @SuppressLint("ValidFragment")
+
     public HomeFragment(AdapterView.OnItemClickListener listener) {
         // Required empty public constructor
         this.listener = listener;
@@ -69,7 +70,6 @@ public class HomeFragment extends Fragment {
         currentUserId=mAuth.getCurrentUser().getUid();
         Regref=FirebaseDatabase.getInstance().getReference().child("transactions").child(currentUserId);
 
-        sum=view.findViewById(R.id.txtPrice);
         incom=view.findViewById(R.id.txtIncome);
         salary=view.findViewById(R.id.txtSalary);
 

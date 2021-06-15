@@ -19,6 +19,7 @@ public class WalletService {
     protected DatabaseReference databaseReference;
     protected int totalIncome = 0;
     protected int totalExpense = 0;
+    protected int sum = 0;
 
     public WalletService() {
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -40,6 +41,8 @@ public class WalletService {
                             } else {
                                 totalExpense += tr.price;
                             }
+                            int earn=(totalIncome-totalExpense);
+                            sum+=earn;
                         }
                         onSuccessListener.onSuccess(dataSnapshot);
                     }
@@ -57,4 +60,11 @@ public class WalletService {
         return totalExpense;
     }
 
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
+    }
 }
